@@ -44,6 +44,7 @@ def sendMial(player_id=None,mail_title="恭喜您获得奖品",mail_body="这是
     title_length = len(mail_title_tr) # 四
     body_length = len(mail_body_tr)  # 六
 
+    #  合并需要发送的数据
     mail_link.extend(player_id_tr)
     mail_link.extend([title_length])
     mail_link.extend(mail_title_tr)
@@ -55,12 +56,13 @@ def sendMial(player_id=None,mail_title="恭喜您获得奖品",mail_body="这是
     mail_link.extend(items_num_tr)
     mail_link.extend(mail_end)
 
+#   获取所有数据的长度
     mail_all_length = len(mail_link)
     if mail_all_length < 128:
         mail_all_length = [len(mail_link)]
     else:
         mail_all_length = [128,len(mail_link)]
-
+#   合并数据
     mail_head.extend(mail_all_length)
     mail_head.extend(mail_link)
     return bytes(mail_head)
